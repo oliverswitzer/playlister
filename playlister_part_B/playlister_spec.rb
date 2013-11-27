@@ -129,6 +129,12 @@ describe "playlister" do
     Genre.all.should eq(genres)
   end
 
+  #
+
+
+
+
+
 #   # Extra Credit
 #   # Complete any song test that is pending (undefined).
 
