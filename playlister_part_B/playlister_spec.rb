@@ -2,7 +2,7 @@ require './lib/artist'
 require './lib/genre'
 require './lib/song'
 require './spec_helper'
-require './playlister.rb'
+require './playlister'
 
 
 describe "playlister" do
@@ -129,22 +129,22 @@ describe "playlister" do
     Genre.all.should eq(genres)
   end
 
-  # Extra Credit
-  # Complete any song test that is pending (undefined).
+#   # Extra Credit
+#   # Complete any song test that is pending (undefined).
 
-  it 'Can initialize a song' do
+#   it 'Can initialize a song' do
 
-  end
+#   end
 
-  it 'A song can have a name' do
+#   it 'A song can have a name' do
 
-  end
+#   end
 
-  it 'A song can have a genre' do
+#   it 'A song can have a genre' do
 
-  end
+#   end
 
-  it 'A song has an artist' do
+#   it 'A song has an artist' do
 
-  end
+#   end
 end
