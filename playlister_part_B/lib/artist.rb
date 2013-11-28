@@ -39,11 +39,6 @@ class Artist
       end
     end
 
-    def add_genre genre
-      @genres << genre
-      genre.artists << self
-    end
-
   end
 
 
