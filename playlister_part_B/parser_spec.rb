@@ -2,7 +2,7 @@ require './lib/artist'
 require './lib/genre'
 require './lib/song'
 require './spec_helper'
-require './app'
+require './parser'
 
 
 describe Playlister, "#collect_songs" do 
