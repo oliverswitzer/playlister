@@ -10,14 +10,10 @@ class Song
     @genre = genre
   end
 
-  # def genre= genre
-  #   @genre = genre
-  #   genre.songs << self
-  # end
-
-  # def name= title, artist_object, genre_object
-  #   artist_object.songs << self
-  #   genre_object
+  def genre= genre
+    @genre = genre
+    genre.songs << self
+  end
 
   # def artist= artist
   #   @artist = artist

@@ -33,13 +33,20 @@ class Artist
   def add_song song
     @songs << song
     @genres << song.genre
+    song.artist = self
     if song.genre       #if song object has a genre
       unless song.genre.artists.include? self
         song.genre.artists << self
       end
     end
-
   end
 
+  def to_s 
+    "Artist: #{self.name}:\n    #{self.songs}\n    #{self.genres}"
+  end
+
+  def self.search_all artist
+    @@all.detect {|defined_artist| defined_artist == artist}
+  end
 
 end
