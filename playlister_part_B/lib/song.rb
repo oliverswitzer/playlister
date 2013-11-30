@@ -15,9 +15,4 @@ class Song
     genre.songs << self
   end
 
-  # def artist= artist
-  #   @artist = artist
-  #   artist.songs << self
-  # end
-
 end

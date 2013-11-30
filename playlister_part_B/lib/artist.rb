@@ -41,12 +41,8 @@ class Artist
     end
   end
 
-  def to_s 
-    "Artist: #{self.name}:\n    #{self.songs}\n    #{self.genres}"
-  end
-
   def self.search_all artist
-    @@all.detect {|defined_artist| defined_artist == artist}
+    @@all.detect {|defined_artist| defined_artist.name == artist}
   end
 
 end

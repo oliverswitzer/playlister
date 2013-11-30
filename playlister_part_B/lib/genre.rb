@@ -22,8 +22,7 @@ class Genre
   end
 
   def self.search_all genre
-    @@all.detect { |defined_genre| defined_genre = genre }
+    @@all.detect { |defined_genre| defined_genre.name == genre }
   end
-
 
 end

@@ -16,6 +16,7 @@ class Parser
     @directory = directory
     @mp3_files = collect_songs
     @artists = []
+    parse
   end
 
   def collect_songs
@@ -47,122 +48,34 @@ class Parser
       m_artist = match_artist(mp3)
       m_song = match_song(mp3)
       m_genre = match_genre(mp3)
+      
+      existing_artist = Artist.search_all(m_artist)
 
-      artist = Artist.search_all(m_artist) || Artist.new(m_artist)
+      artist = existing_artist|| Artist.new(m_artist)
+      
+
+
 
       song = Song.new(m_song)
       song.genre = Genre.search_all(m_genre) || Genre.new(m_genre)
 
       artist.add_song(song)
 
-      artists << artist
-      artists
-    end
-  end
-
-
-  def push_song_to_existing_genre song, existing_genre_name
-    existing_genre = Genre.all.select {|genre_obj| genre_obj.name == existing_genre_name}
-    existing_genre[0].songs << song
-    return existing_genre[0]
-  end
-
-  def push_song_to_new_genre song, new_genre_name
-    new_genre = Genre.new(new_genre_name)
-    new_genre.songs << song
-    return new_genre
-  end
-
-  def push_song_to_existing_artist song, existing_artist_name
-    existing_artist = Artist.all.select {|artist_obj| artist_obj.name == existing_artist_name}
-    existing_artist[0].songs << song
-    return existing_artist[0]
-  end
-
-  def push_song_to_new_artist song, new_artist_name
-    new_artist = Artist.new(new_artist_name)
-    new_artist.songs << song
-    return new_artist
-  end
-
-  def new_song_object mp3_file
-    title = match_song(mp3_file)
-    artist = match_artist(mp3_file)
-    genre = match_genre(mp3_file)
-
-    song = Song.new(title)
-
-    # debugger
-
-    genre_names = Genre.all.collect {|genre_obj| genre_obj.name}
-
-    # debugger
-
-    if genre_names.include?(genre)
-      existing_genre = push_song_to_existing_genre(song, genre)
-      song.genre = existing_genre
-    else
-      new_genre = push_song_to_new_genre(song, genre)
-      song.genre = new_genre
-    end
-
-    artist_names = Artist.all.collect {|artist_obj| artist_obj.name}
-
-    if artist_names.include?(artist)
-      existing_artist = push_song_to_existing_artist(song, artist)
-      song.artist = existing_artist
-    else
-      new_artist = push_song_to_new_artist(song, artist)
-      song.artist = new_artist
-    end
-
-    # artists_of_genre = song.genre.artists.collect {|artist| artist.name == artist}
-
-    # unless artists_of_genre.include? artist
-    #   song.genre.artists << song.artist
-    # end
-
-    # genres_of_artist = song.artist.genres.collect {|genre| genre.name == genre}
-
-    # unless genres_of_artist.include? genre
-    #   song.artist.genres << song.genre
-    # end
-    
-    song
-    # debugger
-    # puts
-  end
-
-  def songify
-    mp3s = collect_songs
-    mp3s.each do |song_str| 
-      # debugger
-      @song_objects << new_song_object(song_str)
+      unless existing_artist
+        artists << artist
+      end
     end
   end
 
 end
 
 
-my_parser = Parser.new
-my_parser.parse
-p my_parser.artists[0].to_s
-debugger
-puts
-
-# my_playlister.new_song_object("Adele - Rolling In the Deep [folk].mp3")
-# my_playlister.new_song_object("Adele - Someone Like You [country].mp3")
-# debugger
-# my_parser.songify
-# my_parser.song_objects
-
-
-# x = []
-# 97.times do |i|
-#   x << my_playlister.song_objects[i].artist.genres
+# my_parser = Parser.new
+# my_parser.parse
+# my_parser.artists.each do |artist|  
+#   puts artist.name
+#   puts "Genres: #{artist.genres.collect {|genre| genre.name}}"
 # end
-# debugger
-# puts
 
 
 
