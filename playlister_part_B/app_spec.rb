@@ -3,7 +3,7 @@
 # require './lib/artist'
 # require './lib/genre'
 # require './lib/song'
-require './spec_helper'
+# require './spec_helper'
 # require './parser'
 
 require './app'
