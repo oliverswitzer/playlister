@@ -10,13 +10,14 @@ require 'yaml'
 
 class Parser
 
-  attr_accessor :directory, :mp3_files, :artists
+  attr_accessor :directory, :mp3_files, :artists, :genres, :songs
 
   def initialize(directory="data")
     @directory = directory
     @mp3_files = collect_songs
     @artists = []
-    parse
+    @genres = []
+    @songs = []
   end
 
   def collect_songs
@@ -53,24 +54,27 @@ class Parser
 
       artist = existing_artist|| Artist.new(m_artist)
       
-
-
+      existing_genre = Genre.search_all(m_genre)
 
       song = Song.new(m_song)
-      song.genre = Genre.search_all(m_genre) || Genre.new(m_genre)
-
+      song.genre = existing_genre || Genre.new(m_genre)
+    
       artist.add_song(song)
 
-      unless existing_artist
-        artists << artist
+      unless existing_genre
+        @genres << song.genre
       end
+
+      unless existing_artist
+        @artists << artist
+      end
+
+      @songs << song
     end
   end
 
 end
-
-
-# my_parser = Parser.new
+ 
 # my_parser.parse
 # my_parser.artists.each do |artist|  
 #   puts artist.name
