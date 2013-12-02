@@ -20,18 +20,18 @@ class Parser
     @songs = []
   end
 
-  def collect_songs
+  def collect_songs   #return an array of mp3 filenames in directory specified in @directory variable
     Dir.entries(directory).select {|f| !File.directory? f}
   end
 
-  def match_song mp3_file
+  def match_song mp3_file  #will return a match for song name for a given mp3 filename
     mp3_to_match = mp3_file.gsub(" [", "*")
     song_regex = /-\s(.*)\*/
     m = song_regex.match(mp3_to_match)
     m[1]   #this will be equal to the song title
   end
 
-  def match_artist mp3_file
+  def match_artist mp3_file #will return a match for song name for a given mp3 filename
     mp3_to_match = mp3_file.gsub(" - ", "*")
     artist_regex = /(.*)\*/
     m = artist_regex.match(mp3_to_match)

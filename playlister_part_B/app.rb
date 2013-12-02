@@ -17,7 +17,11 @@ class App
 
   def greeting
     puts "+" * 80
-    puts "Welcome to Playlister, a CLI application to convert a directory into a playlist!"
+    "Welcome to Playlister, a CLI application to convert a directory into a playlist!".each_char do |char|
+      print char
+      sleep(0.02)
+    end
+    puts
     puts "+" * 80
   end
 
@@ -42,7 +46,11 @@ class App
   def list_artists
     artist_strings = artists.collect {|artist| artist.name}.sort
     artist_strings.each_with_index {|artist, i| puts "#{i+1}: #{artist}"}
-    puts "Type the name of the artist you would like to look up"
+    "Type the name of the artist you would like to look up".each_char do |char|
+      print char
+      sleep(0.02)
+    end
+    puts
     inp = gets.chomp
     pick = artist_strings.detect {|artist| artist.downcase == inp.downcase}
     if pick
@@ -65,7 +73,11 @@ class App
   def list_genres
     genre_strings = genres.collect {|genre| genre.name}.sort
     genre_strings.each_with_index {|genre, i| puts "#{i+1}: #{genre}"}
-    puts "Type the name of the genre you would like to look up"
+    "Type the name of the genre you would like to look up".each_char do |char|
+      print char
+      sleep(0.02)
+    end
+    puts
     inp = gets.chomp
     pick = genre_strings.detect {|artist| artist.downcase == inp.downcase}
     if pick
@@ -115,7 +127,11 @@ class App
   end
 
   def a_or_s_page
-    puts "Type in 'artist' or 'song' to look up an artist's or song's page"
+    "Type in 'artist' or 'song' to look up an artist's or song's page".each_char do |char|
+      print char
+      sleep(0.02)
+    end
+    puts
     inp = gets.chomp
 
     until inp == "artist" || inp == "song"
@@ -124,7 +140,11 @@ class App
     end
 
     if inp == "artist"
-      puts "Type in the artist's name you would like to visit the page of"
+      "Type in the artist's name you would like to visit the page of".each_char do |char|
+        print char
+        sleep(0.02)
+      end
+      puts
       inp2 = gets.chomp
       while return_object(titleize(inp2), artists).nil?
         puts "Your input did not return a matched artist! Try again"
@@ -133,7 +153,11 @@ class App
       end
       artist_page(titleize(inp2))
     elsif inp == "song"
-      puts "Type in the song's name you would like to visit the page of"
+      "Type in the song's name you would like to visit the page of".each_char do |char|
+        print char
+        wait(0.02)
+      end
+      puts
       inp2 = gets.chomp
       while return_object(titleize(inp2), songs).nil?
         puts "Your input did not return a matched song! Try again"
